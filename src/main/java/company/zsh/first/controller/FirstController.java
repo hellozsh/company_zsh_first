@@ -1,7 +1,9 @@
 package company.zsh.first.controller;
 
 
+import company.zsh.first.config.AppConfig;
 import company.zsh.first.model.Item;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +13,14 @@ import java.util.HashMap;
 @RestController
 @RequestMapping("/first")
 public class FirstController {
+
+    @Autowired
+    private AppConfig appConfig;
+
+    @GetMapping("/read_config")
+    public String readApplicationConfig() {
+        return appConfig.getName();
+    }
 
     // http://127.0.0.1:8080/first/echo/me_id?v2=zhouv2
     @GetMapping("/echo/{v1}")

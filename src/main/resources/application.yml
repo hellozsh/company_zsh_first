@@ -5,3 +5,6 @@ server:
 logging:
   level:
     root: DEBUG
+
+zhouzhou:
+  name: zhouzhou
