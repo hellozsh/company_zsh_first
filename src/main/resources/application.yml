@@ -1,4 +1,7 @@
 
+zhouzhou:
+  name: zhouzhou
+
 server:
   port: 8080
 
@@ -6,5 +9,21 @@ logging:
   level:
     root: DEBUG
 
-zhouzhou:
-  name: zhouzhou
+
+
+spring:
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/postgres
+    username: postgres
+    password: A1q2w3e4r`
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 30000
+      idle-timeout: 30000
+      minimum-idle: 5
+      maximum-pool-size: 20
+      connection-init-sql: "SET search_path TO public"
+
+mybatis:
+  mapper-locations: classpath:/mappers/*/*.xml

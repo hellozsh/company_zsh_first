@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="company.zsh.first.dao.custom.PersonMapper">
+
+    <resultMap id="FirstPersonResultMap" type="company.zsh.first.model.Person">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="age" jdbcType="INTEGER" property="age" />
+        <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    </resultMap>
+
+    <insert id="insertPerson">
+       insert into public.t_person(name, age) values ('zhou', 18);
+    </insert>
+
+    <!--入参-->
+    <insert id="insertOnePerson">
+       insert into public.t_person(name , age) values (#{name, jdbcType=VARCHAR}, #{age, jdbcType=INTEGER});
+    </insert>
+
+    <select id="insertOnePersonWithTime" resultType = "java.lang.Integer">
+      insert into public.t_person(name, age, created_at)
+      values (#{person.name, jdbcType=VARCHAR}, #{person.age, jdbcType=INTEGER},  #{time, jdbcType=INTEGER})
+      returning currval('public.t_person_id_seq'); /*返回当前分配的主键值*/
+    </select>
+
+    <!--设置主键返回，并关联person中的id-->
+    <insert id="insertOnePersonReturnId" useGeneratedKeys="true" keyColumn="id" keyProperty="person.id">
+      insert into public.t_person(name, age, created_at)
+      values (#{person.name, jdbcType=VARCHAR}, #{person.age, jdbcType=INTEGER},  #{time, jdbcType=INTEGER})
+    </insert>
+
+    <select id="selectPersons" resultMap="FirstPersonResultMap">
+        select * from public.t_person;
+    </select>
+
+    <delete id="deletePerson">
+        delete from public.t_person where id = (#{id, jdbcType=INTEGER});
+    </delete>
+
+    <update id="updatePerson">
+
+    </update>
+</mapper>

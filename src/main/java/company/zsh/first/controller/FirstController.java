@@ -3,11 +3,16 @@ package company.zsh.first.controller;
 
 import company.zsh.first.config.AppConfig;
 import company.zsh.first.model.Item;
+import company.zsh.first.model.Person;
+import company.zsh.first.service.FirstService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 // 能够使 Spring Context 发现该类(作为 Spring Bean)
 @RestController
@@ -17,8 +22,46 @@ public class FirstController {
     @Autowired
     private AppConfig appConfig;
 
+    @Autowired
+    private FirstService firstService;
+
+    @GetMapping("/person")
+    public List<Person> getPerson() {
+
+        return firstService.getPersons();
+    }
+
+    @DeleteMapping("/person/{id}")
+    public ResponseEntity deletePerson(@PathVariable("id") Integer id) {
+
+        System.out.println("zhousuhua ==== id="+id);
+        firstService.deletePerson(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/person")
+    public ResponseEntity addPerson(@RequestBody Person person) {
+        int result = firstService.addOnePerson(person);
+        return ResponseEntity.ok().body(result);
+    }
+
+    @PostMapping("/person_time")
+    public ResponseEntity addPersonWithTime(@RequestBody Person person) {
+        int result = firstService.addOnePersonWithTime(person, new Date());
+        return ResponseEntity.ok().body(result);
+    }
+
+    @PostMapping("/person_id_respon")
+    public ResponseEntity addOnePersonReturnId(@RequestBody Person person) {
+        Long result = firstService.addOnePersonReturnId(person, new Date());
+
+        return ResponseEntity.ok().body(result);
+    }
+
     @GetMapping("/read_config")
     public String readApplicationConfig() {
+
+         firstService.addOnePerson();
         return appConfig.getName();
     }
 
