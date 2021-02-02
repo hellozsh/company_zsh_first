@@ -62,6 +62,45 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<!--mybatis-gnerator 插件，作用: 根据表，生成代码-->
+			<plugin>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>1.4.0</version>
+				<executions>
+					<execution>
+						<id>Generate MyBatis Artifacts</id>
+						<goals>
+						   <goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<overwrite>true</overwrite>
+					<configurationFile>${basedir}/generatorConfig.xml</configurationFile>
+					<includeAllDependencies>true</includeAllDependencies>
+					<includeCompileDependencies>true</includeCompileDependencies>
+					<verbose>true</verbose>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.mybatis.generator</groupId>
+						<artifactId>mybatis-generator-core</artifactId>
+						<version>1.4.0</version>
+					</dependency>
+					<!--<dependency>
+						<groupId>com.xzlcorp</groupId>
+						<artifactId>x-utils-plugins</artifactId>
+						<version>1.0.0</version>
+					</dependency>-->
+					<dependency>
+						<groupId>org.postgresql</groupId>
+						<artifactId>postgresql</artifactId>
+						<version>42.2.5</version>
+					</dependency>
+				</dependencies>
+			</plugin>
 		</plugins>
 
 	</build>

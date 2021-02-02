@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--  <classPathEntry location="" />-->
+    <context id="MyDemo" targetRuntime="MyBatis3">
+
+        <property name="javaFileEncoding" value="UTF-8"/>
+<!--        <plugin type="com.xzlcorp.xutils.plugin.PgPagination" />-->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+
+        <jdbcConnection driverClass="org.postgresql.Driver"
+                        connectionURL="jdbc:postgresql://127.0.0.1:5432/postgres"
+                        userId="postgres"
+                        password="A1q2w3e4r`">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="useJSR310" value="true"/>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="company.zsh.first.model.auto" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="false" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mappers.auto"  targetProject="./src/main/resources">
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="MIXEDMAPPER" targetPackage="company.zsh.first.dao.auto"  targetProject="./src/main/java">
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+
+        <!--    domainObjectName="Person" -->
+        <table schema="public" tableName="t_person">
+            <generatedKey column="id" sqlStatement="SELECT CURRVAL('t_person_id_seq')"
+                          identity="true"/>
+        </table>
+    </context>
+</generatorConfiguration>
