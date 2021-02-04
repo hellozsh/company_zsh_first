@@ -4,38 +4,47 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <!--  <classPathEntry location="" />-->
-    <context id="MyDemo" targetRuntime="MyBatis3">
 
+    <!--指定将使用遗留的DB2 CLI驱动程序连接到数据库，还指定在何处可以找到驱动程序。-->
+    <!--<classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" />-->
+
+    <context id="ZTables" targetRuntime="MyBatis3">
+
+        <!--定义生成的java类的编码格式-->
         <property name="javaFileEncoding" value="UTF-8"/>
-<!--        <plugin type="com.xzlcorp.xutils.plugin.PgPagination" />-->
+        <plugin type="com.xzlcorp.xutils.plugin.PgPagination" />
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
 
+        <!--How to connect to the database-->
         <jdbcConnection driverClass="org.postgresql.Driver"
                         connectionURL="jdbc:postgresql://127.0.0.1:5432/postgres"
                         userId="postgres"
                         password="A1q2w3e4r`">
         </jdbcConnection>
 
+        <!--自定义转换类型, 指定JDBC类型和Java类型的转换关系。-->
         <javaTypeResolver>
-            <property name="useJSR310" value="true"/>
-            <property name="forceBigDecimals" value="false" />
+            <property name="useJSR310" value="true"/><!--不知道什么意思-->
+            <property name="forceBigDecimals" value="false" /> <!--这意味着整数类型(Short、Integer、Long等)将被替换-->
         </javaTypeResolver>
 
+        <!--数据bean-->
         <javaModelGenerator targetPackage="company.zsh.first.model.auto" targetProject="./src/main/java">
             <property name="enableSubPackages" value="false" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
+        <!--SQL配置-->
         <sqlMapGenerator targetPackage="mappers.auto"  targetProject="./src/main/resources">
             <property name="enableSubPackages" value="false" />
         </sqlMapGenerator>
 
+        <!--Mapper接口-->
         <javaClientGenerator type="MIXEDMAPPER" targetPackage="company.zsh.first.dao.auto"  targetProject="./src/main/java">
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
 
-        <!--    domainObjectName="Person" -->
+        <!--    表名 -->
         <table schema="public" tableName="t_person">
             <generatedKey column="id" sqlStatement="SELECT CURRVAL('t_person_id_seq')"
                           identity="true"/>

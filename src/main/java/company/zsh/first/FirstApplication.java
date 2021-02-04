@@ -6,7 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @MapperScan(basePackages = {
-        "company.zsh.first.dao.custom.**"
+        "company.zsh.first.dao.custom.**",
+		"company.zsh.first.dao.auto.**"
 })
 @SpringBootApplication
 public class FirstApplication {

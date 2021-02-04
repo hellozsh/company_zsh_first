@@ -56,6 +56,14 @@
 
 	</dependencies>
 
+	<pluginRepositories>
+		<pluginRepository>
+			<id>xzl-corp</id>
+			<name>xzlcorp</name>
+			<url>https://maven.xzlcorp.com/repository/maven-releases/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -83,17 +91,18 @@
 					<includeCompileDependencies>true</includeCompileDependencies>
 					<verbose>true</verbose>
 				</configuration>
+
 				<dependencies>
 					<dependency>
 						<groupId>org.mybatis.generator</groupId>
 						<artifactId>mybatis-generator-core</artifactId>
 						<version>1.4.0</version>
 					</dependency>
-					<!--<dependency>
+					<dependency>
 						<groupId>com.xzlcorp</groupId>
 						<artifactId>x-utils-plugins</artifactId>
 						<version>1.0.0</version>
-					</dependency>-->
+					</dependency>
 					<dependency>
 						<groupId>org.postgresql</groupId>
 						<artifactId>postgresql</artifactId>
